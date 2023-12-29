@@ -3,9 +3,16 @@
     "name": "Time sheet autofill",
     "description": "Autofill Allen Institute Oracle time sheets",
     "version": "0.1",
+    "permissions": ["activeTab"],
     "background": {
-        "service_worker": "background.js"
+        "service_worker": "service-worker.js"
     },
+    "content_scripts": [
+        {
+            "matches": ["https://*.oraclecloud.com/*"],
+            "js": ["content-script.js"]
+        }
+    ],
     "action": {
         "default_icon": {
             "16": "images/icon-16.png",
