@@ -1,4 +1,4 @@
-import TimeCardOptions from './content-script.d'
+import TimeCardOptions from './time-card'
 chrome.action.onClicked.addListener((tab) => {
   const options: TimeCardOptions = {
     projectCode: '103-01-001-10 : Allen Cell Science Activities',
