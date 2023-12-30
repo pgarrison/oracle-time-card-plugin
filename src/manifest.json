@@ -3,7 +3,10 @@
     "name": "Time sheet autofill",
     "description": "Autofill Allen Institute Oracle time sheets",
     "version": "0.1",
-    "permissions": ["activeTab"],
+    "permissions": [
+        "activeTab",
+        "storage"
+    ],
     "background": {
         "service_worker": "service-worker.js"
     },

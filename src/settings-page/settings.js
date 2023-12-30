@@ -1,32 +1,36 @@
 // Saves options to chrome.storage
 const saveOptions = () => {
-    const color = document.getElementById('color').value;
-    const likesColor = document.getElementById('like').checked;
-  
+    const projectCode = document.getElementById('project-code').value;
+    const task = document.getElementById('task').value;
+    const expenditureType = document.getElementById('expenditure-type').value;
+
     chrome.storage.sync.set(
-      { favoriteColor: color, likesColor: likesColor },
-      () => {
-        // Update status to let user know options were saved.
-        const status = document.getElementById('status');
-        status.textContent = 'Options saved.';
-        setTimeout(() => {
-          status.textContent = '';
-        }, 750);
-      }
-    );
-  };
-  
-  // Restores select box and checkbox state using the preferences
-  // stored in chrome.storage.
-  const restoreOptions = () => {
+        { projectCode, task, expenditureType },
+        () => {
+            // Update status to let user know options were saved.
+            const status = document.getElementById('status');
+            status.textContent = 'Saved.';
+            setTimeout(() => {
+                status.textContent = '';
+            }, 750);
+        });
+};
+    
+// Restores select box and checkbox state using the preferences
+// stored in chrome.storage.
+const restoreOptions = () => {
     chrome.storage.sync.get(
-      { favoriteColor: 'red', likesColor: true },
-      (items) => {
-        document.getElementById('color').value = items.favoriteColor;
-        document.getElementById('like').checked = items.likesColor;
-      }
-    );
-  };
-  
-  document.addEventListener('DOMContentLoaded', restoreOptions);
-  document.getElementById('save').addEventListener('click', saveOptions);
+        {
+            projectCode: '103-01-001-10 : Allen Cell Science Activities',
+            task: 'Default : Default',
+            expenditureType: 'Regular - Straight Time',
+        },
+        (items) => {
+            document.getElementById('project-code').value = items.projectCode;
+            document.getElementById('task').value = items.task;
+            document.getElementById('expenditure-type').value = items.expenditureType;
+        });
+};
+
+document.addEventListener('DOMContentLoaded', restoreOptions);
+document.getElementById('save').addEventListener('click', saveOptions);
