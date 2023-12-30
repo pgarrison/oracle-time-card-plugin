@@ -3,7 +3,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   entry: {
-    'content-script': './src/content-script/content-script.ts',
+    'content-script': './src/content-script.ts',
     'service-worker': './src/service-worker.ts',
     'settings': './src/settings-page/settings.js',
   },

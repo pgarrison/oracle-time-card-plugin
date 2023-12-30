@@ -1,6 +1,6 @@
-import { SupportQuery, Supported, TimeCardOptionsMessage } from '../time-card.d'
-import fillOutForm from './lib/fill-form'
-import { navigateToAddTimeCard, isSupportedPage } from './lib/navigate-to-time-cards'
+import { SupportQuery, Supported, TimeCardOptionsMessage } from './time-card'
+import fillOutForm from './content-script/fill-form'
+import { navigateToAddTimeCard, isSupportedPage } from './content-script/navigate-to-time-cards'
 
 chrome.runtime.onMessage.addListener(
     async function(request: TimeCardOptionsMessage | SupportQuery, _, sendResponse) {

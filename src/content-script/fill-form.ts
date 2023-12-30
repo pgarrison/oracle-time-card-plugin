@@ -1,4 +1,4 @@
-import { TimeCardOptions } from '../../time-card.d'
+import { TimeCardOptions } from '../time-card'
 import { waitForElms, findOne, xpathSnapshotToArray } from './domQuery';
 
 function sleep(ms: number) {
