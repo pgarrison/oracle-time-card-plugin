@@ -1,7 +1,7 @@
 (async () => {
     function xpathSnapshotToArray(snapshot) {
         // An XPathResult object lacks normal array properties and methods like length and forEach
-        arr = [];
+        const arr = [];
         for (let i = 0; i < snapshot.snapshotLength; i++) {
             arr[i] = snapshot.snapshotItem(i);
         }
