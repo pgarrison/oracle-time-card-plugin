@@ -3,8 +3,9 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   entry: {
-    'content-script': './src/content-script.ts',
+    'content-script': './src/content-script/content-script.ts',
     'service-worker': './src/service-worker.ts',
+    'settings': './src/settings-page/settings.js',
   },
   mode: 'production',
   devtool: 'inline-source-map',
@@ -22,6 +23,7 @@ module.exports = {
         patterns: [
             { from: 'src/manifest.json' },
             { from: 'src/icons', to: 'icons' },
+            { from: 'src/settings-page/settings.html' },
         ],
     }),
   ],

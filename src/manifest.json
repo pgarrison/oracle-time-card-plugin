@@ -13,6 +13,10 @@
             "js": ["content-script.js"]
         }
     ],
+    "options_ui": {
+        "page": "settings.html",
+        "open_in_tab": false
+    },
     "action": {
         "default_icon": {
             "16": "icons/icon16.png",

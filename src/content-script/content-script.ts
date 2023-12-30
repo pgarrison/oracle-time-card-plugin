@@ -1,4 +1,4 @@
-import { SupportQuery, Supported, TimeCardOptions } from './time-card.d'
+import { SupportQuery, Supported, TimeCardOptions } from '../time-card.d'
 import fillOutForm from './lib/fill-form'
 import { navigateToAddTimeCard, isSupportedPage } from './lib/navigate-to-time-cards'
 
