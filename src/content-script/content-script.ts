@@ -1,9 +1,9 @@
-import { SupportQuery, Supported, TimeCardOptions } from '../time-card.d'
+import { SupportQuery, Supported, TimeCardOptionsMessage } from '../time-card.d'
 import fillOutForm from './lib/fill-form'
 import { navigateToAddTimeCard, isSupportedPage } from './lib/navigate-to-time-cards'
 
 chrome.runtime.onMessage.addListener(
-    async function(request: TimeCardOptions | SupportQuery, _, sendResponse) {
+    async function(request: TimeCardOptionsMessage | SupportQuery, _, sendResponse) {
         if (request.messageType === 'support') {
             sendResponse(isSupportedPage());
         } else {

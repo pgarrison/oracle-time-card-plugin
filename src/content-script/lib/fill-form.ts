@@ -1,5 +1,5 @@
 import { TimeCardOptions } from '../../time-card.d'
-import { waitForElms, findOne } from './domQuery';
+import { waitForElms, findOne, xpathSnapshotToArray } from './domQuery';
 
 function sleep(ms: number) {
     return new Promise(resolve => setTimeout(resolve, ms));
@@ -7,12 +7,34 @@ function sleep(ms: number) {
 
 async function setDropdownValue(selector: string, value: string) {
     const element = await findOne(selector) as HTMLInputElement;
+    // Update the input element's value (checked by Oracle ADF file inputSearch-ir4z5i.js line 2526)
     element.value = value;
-    // Setting the value isn't enough: now we have to click to open the dropdown, and click the
-    // right element in the dropdown.
-    element.click();
-    // Since we set element.value, our chosen element is at the top of the list
-    (await findOne("tr[aria-selected='true']")).click()
+    // Make a keyup event: this is what Oracle ADF listens for. The key itself is irrelevant, since
+    // element.value is what ADF looks at.
+    // The bubbles property is critical: ADF manages its own event queue by letting all (important)
+    // events bubble up to the top level document. But we can't just dispatch the event to
+    // document.documentElement because then the event target wouldn't point to the input element.
+    const event = new KeyboardEvent('keyup', { key: '1', bubbles: true });
+    // Use dispatchEvent to send the event the text box. This will trigger the dropdown's item list
+    // to pop up
+    element.dispatchEvent(event);
+    // Setting the value isn't enough: now we have to click the right element in the dropdown.
+    // Since we set element.value, our chosen element is at the top of the list, but we select it
+    // with an xpath query to make sure we've waited long enough for the dropdown item to load
+    const matches = await waitForElms(`//th[contains(div, "${value}")]`, true);
+    if (matches.length > 1) {
+        // Perhaps there are multiple matches, but just one exact match?
+        const exactMatches = xpathSnapshotToArray(document.evaluate(`//th[div="${value}"]`, document, null, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE));
+        if (exactMatches.length === 1) {
+            exactMatches[0].click();
+        } else {
+            const errorMessage = `Time card autofill warning: The option ${value} is ambiguous and matches multiple possible choices. Please edit your extension settings. (Right click on the extension icon, then choose "Options".)`;
+            alert(errorMessage);
+            throw new Error(errorMessage);
+        }
+    } else {
+        matches[0].click();
+    }
 }
 
 export default async function fillOutForm(request: TimeCardOptions) {

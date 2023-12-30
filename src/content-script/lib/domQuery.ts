@@ -1,4 +1,4 @@
-function xpathSnapshotToArray(snapshot: XPathResult) {
+export function xpathSnapshotToArray(snapshot: XPathResult) {
     // An XPathResult object lacks normal array properties and methods like length and forEach
     const arr = [];
     for (let i = 0; i < snapshot.snapshotLength; i++) {

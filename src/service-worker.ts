@@ -1,4 +1,4 @@
-import { SupportQuery, Supported, TimeCardOptions } from './time-card'
+import { SupportQuery, Supported, TimeCardOptions, TimeCardOptionsMessage } from './time-card'
 
 function setSupported(isSupported: boolean) {
   const icon = isSupported ? 'icons/icon16.png' : 'icons/gray16.png';
@@ -21,11 +21,9 @@ chrome.runtime.onMessage.addListener((message: Supported) => {
 });
 
 chrome.action.onClicked.addListener((tab) => {
-  const options: TimeCardOptions = {
-    messageType: 'click',
-    projectCode: '103-01-001-10 : Allen Cell Science Activities',
-    task: 'Default : Default',
-    expenditureType: 'Regular - Straight Time',
-  };
-  chrome.tabs.sendMessage(tab.id, options);
+  chrome.storage.sync.get().then((settings: TimeCardOptions) => {
+    console.dir(settings);
+    const options: TimeCardOptionsMessage = { messageType: 'click', ...settings };
+    chrome.tabs.sendMessage(tab.id, options);
+  });
 });

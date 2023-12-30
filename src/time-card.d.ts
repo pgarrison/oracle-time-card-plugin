@@ -1,6 +1,11 @@
 // Send to content script when plugin is clicked
-export type TimeCardOptions = {
+export type TimeCardOptionsMessage = {
     messageType: 'click';
+    projectCode: string;
+    task: string;
+    expenditureType: string;
+}
+export type TimeCardOptions = {
     projectCode: string;
     task: string;
     expenditureType: string;
