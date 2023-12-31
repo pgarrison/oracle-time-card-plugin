@@ -1,0 +1,48 @@
+name: Release
+on:
+  push:
+    tags:
+      - "v*.*.*"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Node.js 20
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20.x
+      - name: yarn install
+        uses: borales/actions-yarn@v4
+        with:
+          cmd: install
+      - name: yarn build
+        uses: borales/actions-yarn@v4
+        with:
+          cmd: build
+      - name: Create release folder
+        run: mkdir -p dist/release
+      - name: Make zip
+        uses: thedoctor0/zip-release@0.7.6
+        with:
+          type: zip
+          directory: dist
+          exclusions: release
+          filename: release/time-card-extension.zip
+      - name: Make tar
+        uses: thedoctor0/zip-release@0.7.6
+        with:
+          type: tar
+          directory: dist
+          exclusions: release
+          filename: release/time-card-extension.tar.gz
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: dist/release/time-card-extension.*
