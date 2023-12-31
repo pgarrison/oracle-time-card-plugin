@@ -1,24 +1,27 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>My Test Extension Options</title>
+    <title>Time Card Autofill Options</title>
+    <link rel="stylesheet" type="text/css" href="settings.css" />
   </head>
   <body>
-    <div>
+    <div class="input-label">
       Project Code (e.g. 103-01-001-10)
-      <input id="project-code" type="text" style="width: 30em;">
     </div>
-    <div>
+    <input id="project-code" type="text" style="width: 30em;">
+    <div class="input-label">
       Task (e.g. Default)
-      <input id="task" type="text" style="width: 15em;">
     </div>
-    <div>
+    <input id="task" type="text" style="width: 15em;">
+    <div class="input-label">
       Expenditure Type (e.g. Regular - Straight Time)
-      <input id="expenditure-type" type="text" style="width: 15em;">
     </div>
+    <input id="expenditure-type" type="text" style="width: 15em;">
 
-    <div id="status"></div>
-    <button id="save">Save</button>
+    <div>
+      <button id="save">Save</button>
+      <span id="status"></span>
+    </div>
 
     <script src="settings.js"></script>
   </body>

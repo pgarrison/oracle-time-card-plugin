@@ -10,9 +10,7 @@ const saveOptions = () => {
             // Update status to let user know options were saved.
             const status = document.getElementById('status');
             status.textContent = 'Saved.';
-            setTimeout(() => {
-                status.textContent = '';
-            }, 750);
+            status.classList.add('hidden'); // "hidden" class has a fade out animation
         });
 };
     

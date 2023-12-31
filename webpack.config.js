@@ -24,6 +24,7 @@ module.exports = {
             { from: 'src/manifest.json' },
             { from: 'src/icons', to: 'icons' },
             { from: 'src/settings-page/settings.html' },
+            { from: 'src/settings-page/settings.css' },
         ],
     }),
   ],

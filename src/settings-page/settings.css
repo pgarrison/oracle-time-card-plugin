@@ -1,0 +1,19 @@
+.input-label {
+    font-size: small;
+    color: gray;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+input {
+    margin-top: 0.5ex;
+    margin-bottom: 1.5ex;
+}
+
+/* Transition borrowed from StackOverflow under CC BY-SA 4.0
+ * https://stackoverflow.com/a/20910008
+ */
+.hidden {
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s 2s, opacity 2s ease-in;
+}
