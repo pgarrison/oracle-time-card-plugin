@@ -1,5 +1,4 @@
 import { SupportQuery, Supported, TimeCardOptions, TimeCardOptionsMessage } from './time-card'
-import { sendEvents, sendError } from './analytics/analytics';
 
 function setSupported(isSupported: boolean) {
   const icon = isSupported ? 'icons/icon16.png' : 'icons/gray16.png';
@@ -22,9 +21,8 @@ chrome.runtime.onMessage.addListener((message: Supported) => {
 });
 
 chrome.action.onClicked.addListener((tab) => {
-  sendEvents([{ type: "activated" }]);
   chrome.storage.sync.get().then((settings: TimeCardOptions) => {
     const options: TimeCardOptionsMessage = { messageType: 'click', ...settings };
     chrome.tabs.sendMessage(tab.id, options);
-  }).catch(sendError);
+  });
 });

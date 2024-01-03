@@ -1,12 +1,6 @@
 import { SupportQuery, Supported, TimeCardOptionsMessage } from './time-card'
 import fillOutForm from './content-script/fill-form'
 import { navigateToAddTimeCard, isSupportedPage } from './content-script/navigate-to-time-cards'
-import { sendError } from './analytics/analytics';
-
-async function navigateAndFill(request: TimeCardOptionsMessage) {
-    await navigateToAddTimeCard();
-    return fillOutForm(request);
-}
 
 chrome.runtime.onMessage.addListener(
     async function(request: TimeCardOptionsMessage | SupportQuery, _, sendResponse) {
@@ -17,7 +11,8 @@ chrome.runtime.onMessage.addListener(
                 console.log('Time sheet autofiller activated on unsupported page.');
                 return;
             }
-            navigateAndFill(request).catch(sendError);
+            await navigateToAddTimeCard();
+            fillOutForm(request);
         }
     }
 );

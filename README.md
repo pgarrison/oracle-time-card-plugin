@@ -2,9 +2,6 @@
 Chrome extension for autofilling Allen Institute time cards.
 With a single click, you can fill out a time card with a single time code for 8 hours M-F.
 
-## Privacy and user data
-This extension sends a minimal amount of data to Google Analytics to count how many people use it.
-
 ## Installation
 Currently only Chrome is supported.
 

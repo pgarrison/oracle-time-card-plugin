@@ -1,4 +1,3 @@
-import { sendError, sendEvents } from '../analytics/analytics';
 import { TimeCardOptions } from '../time-card'
 import { waitForElms, findOne, xpathSnapshotToArray } from './domQuery';
 import getWeekdayCells from './get-weekday-cells';
@@ -62,5 +61,4 @@ export default async function fillOutForm(request: TimeCardOptions) {
     enabledWeekdays.forEach(el => el.click());
     (await findOne('img[title="Close"]')).click();
     (await findOne('//a[span="OK"]', true)).click();
-    sendEvents([{ type: "success" }])
 }
