@@ -50,6 +50,5 @@ export async function findOne(selector: string, xpath?: boolean) {
     if (results.length > 1) {
         console.warn('Time sheet autofiller found multiple items matching query! May work incorrectly. Please report this.')
     }
-    console.log(results);
     return results[0];
 }

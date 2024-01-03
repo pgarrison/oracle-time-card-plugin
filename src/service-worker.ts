@@ -11,7 +11,7 @@ chrome.tabs.onActivated.addListener((tabInfo) => {
   setSupported(false);
   const supportQuery: SupportQuery = { messageType: 'support' };
   chrome.tabs.sendMessage(tabInfo.tabId, supportQuery)
-    .then(isSupported  => { console.log(`response ${isSupported}`); setSupported(isSupported) })
+    .then(isSupported  =>  setSupported(isSupported))
     // Ignore errors: they are just because we try to send messages to tabs without our content
     // script
     .catch(receivingEndDoesNotExist => null);
@@ -24,7 +24,6 @@ chrome.runtime.onMessage.addListener((message: Supported) => {
 chrome.action.onClicked.addListener((tab) => {
   sendEvents([{ type: "activated" }]);
   chrome.storage.sync.get().then((settings: TimeCardOptions) => {
-    console.dir(settings);
     const options: TimeCardOptionsMessage = { messageType: 'click', ...settings };
     chrome.tabs.sendMessage(tab.id, options);
   }).catch(sendError);
