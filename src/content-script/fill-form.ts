@@ -1,5 +1,6 @@
 import { TimeCardOptions } from '../time-card'
 import { waitForElms, findOne, xpathSnapshotToArray } from './domQuery';
+import getWeekdayCells from './get-weekday-cells';
 
 function sleep(ms: number) {
     return new Promise(resolve => setTimeout(resolve, ms));
@@ -56,7 +57,7 @@ export default async function fillOutForm(request: TimeCardOptions) {
     // inputs that break the heuristic used above that Quantity is the last text input
     // There are two "Select dates" buttons. Either is fine to click
     (await waitForElms('[title="Select dates"]'))[0].click()
-    const enabledWeekdays = await waitForElms('[role="gridcell"][data-afr-adfday="nm"]:not([aria-disabled])') as HTMLInputElement[];
+    const enabledWeekdays = await getWeekdayCells();
     enabledWeekdays.forEach(el => el.click());
     (await findOne('img[title="Close"]')).click();
     (await findOne('//a[span="OK"]', true)).click();
