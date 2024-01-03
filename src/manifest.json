@@ -8,8 +8,7 @@
         "storage"
     ],
     "background": {
-        "service_worker": "service-worker.js",
-        "scripts": ["service-worker.js"]
+        "service_worker": "service-worker.js"
     },
     "content_scripts": [
         {
