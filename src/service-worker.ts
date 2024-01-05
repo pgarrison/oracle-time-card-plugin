@@ -1,4 +1,5 @@
 import { SupportQuery, Supported, TimeCardOptions, TimeCardOptionsMessage } from './time-card'
+import defaultSettings from './settings-page/defaultSettings'
 
 function setSupported(isSupported: boolean) {
   const icon = isSupported ? 'icons/icon16.png' : 'icons/gray16.png';
@@ -22,6 +23,7 @@ chrome.runtime.onMessage.addListener((message: Supported) => {
 
 chrome.action.onClicked.addListener((tab) => {
   chrome.storage.sync.get().then((settings: TimeCardOptions) => {
+    settings = Object.assign(settings, defaultSettings);
     const options: TimeCardOptionsMessage = { messageType: 'click', ...settings };
     chrome.tabs.sendMessage(tab.id, options);
   });

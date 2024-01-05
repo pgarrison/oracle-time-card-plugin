@@ -1,3 +1,5 @@
+import defaultSettings from "./defaultSettings";
+
 // Saves options to chrome.storage
 const saveOptions = () => {
     const projectCode = document.getElementById('project-code').value;
@@ -18,11 +20,7 @@ const saveOptions = () => {
 // stored in chrome.storage.
 const restoreOptions = () => {
     chrome.storage.sync.get(
-        {
-            projectCode: '103-01-001-10 : Allen Cell Science Activities',
-            task: 'Default : Default',
-            expenditureType: 'Regular - Straight Time',
-        },
+        defaultSettings,
         (items) => {
             document.getElementById('project-code').value = items.projectCode;
             document.getElementById('task').value = items.task;
